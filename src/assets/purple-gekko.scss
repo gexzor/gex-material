@@ -1,0 +1,9 @@
+@import '~@angular/material/_theming.scss';
+@include mat-core();
+$primary: mat-palette($mat-purple, 900);
+$accent: mat-palette($mat-purple, 400);
+$warn: mat-palette($mat-red, 600);
+$purple-gekko: mat-dark-theme($primary, $accent, $warn);
+.dark-theme {
+    @include angular-material-theme($purple-gekko);
+}

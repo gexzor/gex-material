@@ -1,0 +1,38 @@
+<mat-dialog-content>
+    <h3 mat-dialog-title>Create user</h3>
+    <form class="register-container" [formGroup]='regForm'>
+        <mat-form-field color="accent" class="my-2">
+            <input matInput placeholder="Username" required formControlName="username" [class.text-success]="username.valid">
+            <mat-hint align="start" class="text-danger" *ngIf="username.invalid && username.dirty">{{ getErrorMessage().usernameError }}</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="my-2">
+            <input matInput placeholder="Enter your email " required formControlName="email" [class.text-success]="email.valid">
+            <mat-hint align="start" class="text-danger" *ngIf="email.invalid && email.dirty">{{ getErrorMessage().emailError }}</mat-hint>
+            <mat-hint align="end" [ngClass]="{ 'text-muted' : email.valid || email.pristine }">example@domain.com</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="my-2">
+            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required formControlName="password" [class.text-success]="password.valid">
+            <mat-icon matSuffix (click)="hide=! hide">{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon>
+            <mat-hint align="start" class="text-danger" *ngIf="password.invalid && password.dirty">{{ getErrorMessage().passwordError }}</mat-hint>
+            <mat-hint align="end" [class.text-success]="password.valid" *ngIf="password.valid && password.value.length">{{ password.value.length }}/30</mat-hint>
+            <mat-hint align="end" [class.text-danger]="!password.valid" *ngIf="!password.valid && password.value.length">{{ password.value.length }}/30</mat-hint>
+            <!-- <mat-hint align="end" [ngClass]="{ 'text-success' : password.valid, 'text-danger' : !password.valid }" *ngIf="password.value.length && !password.valid">
+	            {{ password.value.length }}/30 characters
+	        </mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="my-2">
+            <input matInput placeholder="Repeat your password" [type]="hide ? 'password' : 'text'" required formControlName="repeat" [class.text-success]="repeat.valid">
+            <mat-icon matSuffix (click)="hide=! hide">{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon>
+            <mat-hint align="start" class="text-danger" *ngIf="repeat.invalid && repeat.dirty">{{ getErrorMessage().repeatError }}</mat-hint>
+            <mat-hint align="end" [class.text-success]="repeat.valid" *ngIf="repeat.valid && repeat.value.length">{{ repeat.value.length }}/{{ password.value.length }}</mat-hint>
+            <mat-hint align="end" [class.text-danger]="!repeat.valid" *ngIf="!repeat.valid && repeat.value.length">{{ repeat.value.length }}/{{ password.value.length }}</mat-hint>
+        </mat-form-field>
+        <mat-dialog-actions class="d-flex flex-row justify-content-center">
+            <button mat-button>Create</button>
+            <button mat-button>Cancel</button>
+        </mat-dialog-actions>
+    </form>
+</mat-dialog-content>

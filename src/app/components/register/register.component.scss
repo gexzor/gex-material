@@ -1,0 +1,14 @@
+@import '../../../assets/_variables';
+.register-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 450px;
+    @media (max-width: 720px) {
+        width: auto;
+    }
+    mat-form-field {}
+    mat-dialog-actions {
+        margin-bottom: auto; // prevents vertical scrolling
+    }
+}

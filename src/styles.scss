@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import 'assets/_variables';
+@import 'assets/purple-gekko';
+.color-primary {
+    color: $color-primary;
+}
+
+.color-accent {
+    color: $color-accent;
+}
+
+body {
+    margin: 0;
+}

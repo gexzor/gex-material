@@ -1,0 +1,25 @@
+@import '../../../assets/_variables';
+mat-toolbar {
+    min-height: $toolbar-height; // fixes toolbar height shifts when lowering screen width
+    .main-nav {
+        .sidenav-toggle {
+            display: none;
+            min-width: $toolbar-height;
+            padding: 0;
+            margin: 0;
+            @media (max-width: 720px) {
+                display: flex;
+            }
+            mat-icon {
+                font-size: 30px;
+                height: $toolbar-height;
+                width: $toolbar-height;
+                line-height: $toolbar-height;
+            }
+        }
+    }
+    .toolbar-spacer {
+        flex: 1 1 auto;
+    }
+    .misc-nav {}
+}

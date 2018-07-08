@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <div class="main-nav d-flex flex-row align-items-center">
+            <button class="sidenav-toggle" mat-button (click)="toggleSidenav.emit()">
+				<mat-icon>menu</mat-icon>
+			</button>
+            <span>Main navigation</span>
+        </div>
+        <span class="toolbar-spacer"></span>
+        <div class="misc-nav">
+            <button class="sidenav-register" mat-button (click)="openRegisterDialog()">Register</button>
+            <button class="sidenav-login" mat-button>Log in</button>
+            <button class="sidenav-logout" mat-button>Log out</button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
