@@ -1,16 +1,31 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <div class="main-nav d-flex flex-row align-items-center">
-            <button class="sidenav-toggle" mat-button (click)="toggleSidenav.emit()">
-				<mat-icon>menu</mat-icon>
+	<mat-toolbar-row>
+		<button mat-button (click)="toggleSidenav.emit()" class="sidenav-toggle" *ngIf="hasSidenav">
+			<mat-icon>menu</mat-icon>
+		</button>
+		<div class="main-nav d-flex flex-row align-items-center">
+			<button mat-button class="main-nav-item" [routerLink]="['/home']">
+				<mat-icon>home</mat-icon>
+				<span>Home</span>
 			</button>
-            <span>Main navigation</span>
-        </div>
-        <span class="toolbar-spacer"></span>
-        <div class="misc-nav">
-            <button class="sidenav-register" mat-button (click)="openRegisterDialog()">Register</button>
-            <button class="sidenav-login" mat-button>Log in</button>
-            <button class="sidenav-logout" mat-button>Log out</button>
-        </div>
-    </mat-toolbar-row>
+			<button mat-button class="main-nav-item" [routerLink]="['/users']">
+				<span>Users</span>
+			</button>
+			<button mat-button class="main-nav-item" [routerLink]="['/posts']">
+				<span>Posts</span>
+			</button>
+			<button mat-button class="main-nav-item" [routerLink]="['/todo']">
+				<span>Todo</span>
+			</button>
+		</div>
+		<span class="toolbar-spacer"></span>
+		<div class="misc-nav">
+			<button mat-button class="main-nav-item" [routerLink]="['/profile']">
+				<span>Profile</span>
+			</button>
+			<button class="sidenav-register" mat-button *ngIf="!isLoggedIn" (click)="openRegisterDialog()">Register</button>
+			<button class="sidenav-login" mat-button *ngIf="!isLoggedIn" (click)="openLoginDialog()">Log in</button>
+			<button class="sidenav-logout" mat-button *ngIf="isLoggedIn" (click)="logout()">Log out</button>
+		</div>
+	</mat-toolbar-row>
 </mat-toolbar>

@@ -1,20 +1,14 @@
 <mat-sidenav-container class="sidenav-container" autosize>
-    <mat-sidenav #sidenav class="sidenav mat-elevation-z10" [mode]="isScreenSmall() ? 'over' : 'side'" [opened]="!isScreenSmall()">
-        <mat-toolbar color="primary"><span>Side Navigation</span></mat-toolbar>
-        <mat-nav-list>
-            <mat-list-item *ngFor="let link of links">
-                <a matLine routerLink="#">{{ link }}</a>
-                <button mat-icon-button>
-					<mat-icon>link</mat-icon>
-				</button>
-            </mat-list-item>
-        </mat-nav-list>
-    </mat-sidenav>
-
-    <div class="sidenav-content">
-        <app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
-        <div class="outlet-wrapper mat-elevation-z5">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+	<mat-sidenav #sidenav class="sidenav mat-elevation-z10" [mode]="isScreenSmall() ? 'over' : 'side'" [opened]="!isScreenSmall() && hasSidenav">
+		<mat-toolbar color="primary">
+			<span>Side Navigation</span>
+		</mat-toolbar>
+		<router-outlet name="sidenav"></router-outlet>
+	</mat-sidenav>
+	<div class="sidenav-content">
+		<app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
+		<div class="outlet-wrapper">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
 </mat-sidenav-container>

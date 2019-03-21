@@ -1,0 +1,19 @@
+@import '../../../assets/variables';
+
+.create-post{
+	textarea{
+		min-height: 24px;
+	}
+}
+
+.post{
+	margin-bottom: 20px;
+	mat-card-title{
+		cursor: pointer;
+	}
+	.btn-vote{
+		&:hover mat-icon{
+			color: $color-accent;
+		}
+	}
+}

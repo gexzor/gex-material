@@ -1,0 +1,49 @@
+<mat-card class="comment" [@collapse]="'in'">
+	<mat-card-header>
+		<mat-card-title class="color-accent">
+			<h4>{{ comment.author }}</h4>
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<p>{{ comment.content }}</p>
+	</mat-card-content>
+	<!-- TODO: Fix being able to both upvote and downvote at the same time + active color -->
+	<mat-card-actions>
+		<button mat-button class="btn-vote" [ngClass]="comment.upvoters?.includes(userId) ? 'color-accent' : 'text-muted'"
+		 (click)="upvote(comment._id)">
+			<mat-icon>thumb_up</mat-icon>
+		</button>
+		<span>{{ comment.upvoters?.length }}</span>
+		<button mat-button class="btn-vote" [ngClass]="comment.downvoters?.includes(userId) ? 'color-accent' : 'text-muted'"
+		 (click)="downvote(comment._id)">
+			<mat-icon>thumb_down</mat-icon>
+		</button>
+		<span>{{ comment.downvoters?.length }}</span>
+		<button mat-button color="accent" (click)="share(comment._id)">Share</button>
+		<button mat-button color="accent" type="button" (click)="deleteComment(comment)" *ngIf="isLoggedIn">DELETE</button>
+		<button mat-button color="accent" type="button" (click)="toggleReply()" *ngIf="isLoggedIn">
+			{{ isReplying ? 'CANCEL' : 'REPLY' }}
+		</button>
+	</mat-card-actions>
+
+	<div class="comment-form" *ngIf="isLoggedIn && isReplying">
+		<form [formGroup]='commentForm'>
+			<mat-form-field color="accent" class="my-2 w-100">
+				<textarea matInput matTextareaAutosize placeholder="Leave a comment" required formControlName="content"
+				 [class.text-success]="content.valid"></textarea>
+				<mat-hint align="start" class="text-danger" *ngIf="content.invalid && content.dirty">{{
+					getErrorMessage().contentError }}
+				</mat-hint>
+			</mat-form-field>
+
+			<div class="form-actions">
+				<button mat-button color="accent" (click)="commentForm.dirty ? commentForm.reset() : toggleReply()">{{
+					commentForm.dirty ? 'RESET' : 'CANCEL' }}</button>
+				<button mat-button color="accent" type="button" (click)="createComment(comment)" [disabled]="commentForm.invalid">SUBMIT</button>
+			</div>
+		</form>
+	</div>
+	<div class="comments" *ngFor="let comment of comments">
+		<app-comment [comment]="comment" (_deleteComment)="onDelete($event)" (_createComment)="onCreate($event)"></app-comment>
+	</div>
+</mat-card>

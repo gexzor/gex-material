@@ -1,0 +1,7 @@
+@import '../../../assets/variables';
+
+.btn-vote{
+	&:hover mat-icon{
+		color: $color-accent;
+	}
+}

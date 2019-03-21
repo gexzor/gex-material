@@ -1,0 +1,34 @@
+<div *ngIf="!user">
+	<mat-spinner class="mx-auto"></mat-spinner>
+</div>
+
+<mat-card class="user" *ngIf="user">
+	<mat-card-header>
+		<mat-icon mat-card-avatar svgIcon="{{ user.avatar ? user.avatar : 'svg-3' }}"></mat-icon>
+		<mat-card-title>{{ user.username }}</mat-card-title>
+		<mat-card-subtitle class="text-muted">
+			<i>{{ user.tagline ? user.tagline : 'i pwn n00bz'}}</i>
+		</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+		<span>Biography</span>
+		<p>{{ user.bio ? user.bio : 'In the beginning there were nothing. And ever since it has just been uphill...'}}</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<button mat-button class="btn-vote" [ngClass]="user.upvoters?.includes(userId) ? 'color-accent' : 'text-muted'"
+		 (click)="upvote(user._id)">
+			<mat-icon>thumb_up</mat-icon>
+		</button>
+		<span>{{ user.upvoters?.length }}</span>
+		<button mat-button class="btn-vote" [ngClass]="user.downvoters?.includes(userId) ? 'color-accent' : 'text-muted'"
+		 (click)="downvote(user._id)">
+			<mat-icon>thumb_down</mat-icon>
+		</button>
+		<span>{{ user.downvoters?.length }}</span>
+		<button mat-button color="accent">Share</button>
+		<!-- TODO: Fetch isLoggedIn from parent component -->
+		<button mat-button color="accent" (click)="editUser()">Edit</button>
+		<!-- TODO: Fetch isLoggedIn from parent component -->
+		<button mat-button color="accent" (click)="deleteUser(user._id)">Delete</button>
+	</mat-card-actions>
+</mat-card>

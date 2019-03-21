@@ -1,6 +1,7 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import 'assets/_variables';
 @import 'assets/purple-gekko';
+
 .color-primary {
     color: $color-primary;
 }
@@ -12,3 +13,4 @@
 body {
     margin: 0;
 }
+

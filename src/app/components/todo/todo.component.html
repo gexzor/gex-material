@@ -1,0 +1,38 @@
+<button mat-raised-button color="accent" (click)="startTimer()">
+	TEST
+</button>
+<div class="todo">
+	<form class="todo-search">
+		<mat-form-field>
+			<!-- TODO: Fix input tooltip color -->
+			<input matInput color="accent" type="search" name="todo-search" placeholder="Search or create todo"
+				[(ngModel)]="searchInput">
+			<mat-icon *ngIf="!searchInput">search</mat-icon>
+			<mat-icon *ngIf="searchInput" (click)="searchInput = null" class="clear-search">close</mat-icon>
+		</mat-form-field>
+	</form>
+	<!-- TODO: Implement matRipple effect on mat-list-item -->
+	<mat-list class="todo-list" *ngIf="todoList">
+		<mat-list-item *ngFor="let todo of todoList | filterTodo:searchInput"
+			[ngClass]="todo.status === 'TODO' ? 'todo' : todo.status === 'DOING' ? 'doing' : 'done'"
+			(click)="setStatus(todo)">
+			<h3 matLine class="todo-title">{{ todo.title }} <span class="todo-status">{{ todo.status }}</span></h3>
+			<p matLine class="todo-desc">
+				{{ todo.description }}
+			</p>
+			<div class="todo-controls">
+				<button class="todo-delete" mat-mini-fab color="warn" (click)="deleteTodo(todo)" stopPropagation>
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+		</mat-list-item>
+
+		<div class="todo-create" *ngIf="(todoList | filterTodo:searchInput).length === 0">
+			<button mat-raised-button color="accent" (click)="createTodo()">
+				Create todo
+			</button>
+		</div>
+	</mat-list>
+
+
+</div>

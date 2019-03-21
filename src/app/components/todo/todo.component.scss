@@ -1,0 +1,85 @@
+@import '../../../assets/_variables';
+
+.todo{
+	max-width: 800px;
+	margin: 0 auto;
+
+	.todo-search{
+		width: 300px;
+		margin: 0 auto;
+		mat-form-field{
+			width: 100%;
+			mat-icon{
+				position: absolute;
+				right: 0;
+
+				&.clear-search{
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+	.todo-list{
+		mat-list-item{
+			background-color: rgba(gray, .1);
+			cursor: pointer;
+
+			&:nth-child(odd){
+				background-color: rgba(gray, .05);
+			}
+			&.todo{
+			}
+			&.done{
+				color:rgba(mediumseagreen, 1);
+			}
+			&.doing{
+				color: rgba(darkorchid, 1);
+			}
+			&:hover{
+				.todo-controls{
+					visibility: visible;
+					transition: all 300ms ease-out;
+					opacity: 1;
+					right: -20px;
+				}
+			}
+
+			.todo-title{
+				font-size: 150%;
+			}
+			.todo-desc{
+			}
+			.todo-status{
+				width: 60px;
+				float: right;
+				font-size: 80%;
+			}
+			.todo-controls{
+				visibility: hidden;
+				position: relative;
+				height: 100%;
+				opacity: 0;
+				transition: all 300ms ease-out;
+				right: 20px;
+				.todo-delete{
+					transform: scale(.8);
+					position: absolute;
+					top: 20%;
+					&:focus{
+						outline: none;
+					}
+				}
+			}
+		}
+
+		.todo-create{
+			display: flex;
+			justify-content: center;
+			button{
+
+			}
+		}
+	}
+
+}

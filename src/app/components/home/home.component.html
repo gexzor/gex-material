@@ -1,0 +1,11 @@
+<h1>Home</h1>
+
+<div class="spinner" *ngIf="!users">
+	<mat-spinner class="mx-auto"></mat-spinner>
+</div>
+<mat-nav-list class="users-list" *ngIf="users">
+	<mat-list-item *ngFor="let user of users">
+		<mat-icon svgIcon="{{ user.avatar ? user.avatar : 'svg-3' }}" class="mr-1"></mat-icon>
+		<a [routerLink]="['/users/', user._id]">{{ user.username }}</a>
+	</mat-list-item>
+</mat-nav-list>

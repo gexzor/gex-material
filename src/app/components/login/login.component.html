@@ -1,0 +1,23 @@
+<mat-dialog-content>
+	<h3 mat-dialog-title>Login</h3>
+	<form class="login-container" [formGroup]='loginForm'>
+		<mat-form-field color="accent" class="my-2">
+			<input matInput placeholder="E-mail" required formControlName="email" [class.text-success]="email.valid">
+			<mat-hint align="start" class="text-danger" *ngIf="email.invalid && email.dirty">{{ getErrorMessage().emailError }}</mat-hint>
+		</mat-form-field>
+
+		<mat-form-field color="accent" class="my-2">
+			<input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required formControlName="password"
+			 [class.text-success]="password.valid">
+			<mat-icon matSuffix (click)="hide=! hide">{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon>
+			<mat-hint align="start" class="text-danger" *ngIf="password.invalid && password.dirty">{{ getErrorMessage().passwordError }}</mat-hint>
+			<mat-hint align="end" [class.text-success]="password.valid" *ngIf="password.valid && password.value">{{ password.value.length }}/30</mat-hint>
+			<mat-hint align="end" [class.text-danger]="!password.valid" *ngIf="!password.valid && password.value">{{ password.value.length }}/30</mat-hint>
+		</mat-form-field>
+
+		<mat-dialog-actions class="d-flex flex-row justify-content-center">
+			<button mat-button (click)="login()" [disabled]="loginForm.invalid">Submit</button>
+			<button mat-button (click)="reset()" [disabled]="loginForm.pristine">Reset</button>
+		</mat-dialog-actions>
+	</form>
+</mat-dialog-content>

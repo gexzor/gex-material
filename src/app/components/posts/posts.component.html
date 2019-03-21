@@ -1,0 +1,61 @@
+<div class="create-post my-5" *ngIf="isLoggedIn">
+	<h3 class="color-accent">Create post</h3>
+	<form class="post-form" [formGroup]='postForm'>
+		<mat-form-field color="accent" class="my-2 w-100">
+			<input matInput placeholder="Title" required formControlName="title" [class.text-success]="title.valid">
+			<mat-hint align="start" class="text-danger" *ngIf="title.invalid && title.dirty">{{ getErrorMessage().titleError }}</mat-hint>
+		</mat-form-field>
+
+		<mat-form-field color="accent" class="my-2 w-100">
+			<input matInput placeholder="Subtitle" formControlName="subtitle" [class.text-success]="subtitle.valid">
+			<mat-hint align="start" class="text-danger" *ngIf="subtitle.invalid && subtitle.dirty">{{
+				getErrorMessage().subtitleError }}</mat-hint>
+		</mat-form-field>
+
+		<mat-form-field color="accent" class="my-2 w-100">
+			<textarea matInput matTextareaAutosize placeholder="Type something to post" required formControlName="content"
+			 [class.text-success]="content.valid"></textarea>
+			<mat-hint align="start" class="text-danger" *ngIf="content.invalid && content.dirty">{{
+				getErrorMessage().contentError }}
+			</mat-hint>
+		</mat-form-field>
+
+		<div class="form-actions d-flex flex-row justify-content-center">
+			<button mat-button color="accent" (click)="postForm.reset()" [disabled]="!postForm.dirty">CANCEL</button>
+			<button mat-button color="accent" (click)="createPost()" [disabled]="postForm.invalid">SUBMIT</button>
+		</div>
+	</form>
+</div>
+
+<mat-spinner class="mx-auto" *ngIf="!posts">
+</mat-spinner>
+
+<div class="posts">
+	<!-- <div class="posts" *ngFor="let post of posts">
+	<app-post [post]="post"></app-post> -->
+	<mat-card class="post" *ngFor="let post of posts" [@EnterLeave]="'flyIn'" mat-elevation-z15>
+		<mat-card-header>
+			<mat-card-title class="color-accent" [routerLink]="['/posts/', post._id]">
+				<h3>{{ post.title }}</h3>
+			</mat-card-title>
+			<mat-card-subtitle class="text-muted">by {{ post.author }}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<p>{{ post.content }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button mat-button class="btn-vote" [ngClass]="post.upvoters?.includes(userId) ? 'color-accent' : 'text-muted'"
+			 (click)="upvote(post._id)">
+				<mat-icon>thumb_up</mat-icon>
+			</button>
+			<span>{{ post.upvoters?.length }}</span>
+			<button mat-button class="btn-vote" [ngClass]="post.downvoters?.includes(userId) ? 'color-accent' : 'text-muted'"
+			 (click)="downvote(post._id); rofl(post)">
+				<mat-icon>thumb_down</mat-icon>
+			</button>
+			<span>{{ post.downvoters?.length }}</span>
+			<button mat-button color="accent" type="button">SHARE</button>
+			<button mat-button color="accent" type="button" (click)="deletePost(post._id)" *ngIf="isLoggedIn">DELETE</button>
+		</mat-card-actions>
+	</mat-card>
+</div>

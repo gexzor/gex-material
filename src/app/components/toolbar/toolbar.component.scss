@@ -1,8 +1,7 @@
 @import '../../../assets/_variables';
 mat-toolbar {
-    min-height: $toolbar-height; // fixes toolbar height shifts when lowering screen width
-    .main-nav {
-        .sidenav-toggle {
+	min-height: $toolbar-height; // fixes toolbar height shifts when lowering screen width
+	.sidenav-toggle {
             display: none;
             min-width: $toolbar-height;
             padding: 0;
@@ -16,7 +15,10 @@ mat-toolbar {
                 width: $toolbar-height;
                 line-height: $toolbar-height;
             }
-        }
+		}
+		
+    .main-nav {
+        
     }
     .toolbar-spacer {
         flex: 1 1 auto;
